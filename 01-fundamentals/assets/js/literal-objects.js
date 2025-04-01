@@ -30,3 +30,30 @@ const x = 'vivo';
 console.log('Vivo:', personaje[x]);
 
 console.log('Última película:', personaje['ultima-pelicula']);
+
+
+
+
+// Más detalles
+
+personaje.edad = null;
+
+console.log(personaje);
+
+delete personaje.edad; // Eliminar propiedad
+console.log(personaje);
+
+personaje.casado = true; // Agregar propiedad
+
+let entriesPares = Object.entries(personaje);
+console.log(entriesPares);
+
+console.log(personaje);
+
+Object.freeze(personaje); // Congela el objeto, no se pueden agregar ni eliminar propiedades
+personaje.dinero = 1000000; // No se agrega
+console.log(personaje);
+
+const propiedades = Object.getOwnPropertyNames(personaje);
+const valores = Object.values(personaje);
+console.log({propiedades, valores});
