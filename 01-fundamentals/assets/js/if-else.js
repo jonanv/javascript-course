@@ -23,3 +23,28 @@ if (dia === 0) {
 } else {
     console.log("Hoy no es domingo");
 }
+
+// Sin usar if-else o switch
+dia = 30;
+const diaSemana = {
+    0: "Domingo",
+    1: "Lunes",
+    2: "Martes",
+    3: "Miércoles",
+    4: "Jueves",
+    5: "Viernes",
+    6: "Sábado"
+};
+
+const diaSemana2 = [
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado"
+];
+
+console.log(diaSemana[dia] || 'Día no definido'); // Miércoles
+console.log(diaSemana2[dia] || 'Día no definido'); // Miércoles
