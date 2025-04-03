@@ -13,23 +13,23 @@ const persona = crearPersona('Juan', 'Pérez');
 console.log(persona); // { nombre: 'Juan', apellido: 'Pérez' }
 
 
-function imprimeAegumentos() {
+function imprimeArgumentos() {
     console.log(arguments);
 }
 
-imprimeAegumentos(10, true, false, 'Juan', 'Pérez', { nombre: 'Juan' });
+imprimeArgumentos(10, true, false, 'Juan', 'Pérez', { nombre: 'Juan' });
 
-const imprimeAegumentos2 = (...arguments) => {
+const imprimeArgumentos2 = (...arguments) => {
     // console.log(arguments); // ReferenceError: arguments is not defined
     return arguments;
 }
 
-// const argumentos = imprimeAegumentos2(10, true, false, 'Juan', 'Pérez', { nombre: 'Juan' });
+// const argumentos = imprimeArgumentos2(10, true, false, 'Juan', 'Pérez', { nombre: 'Juan' });
 // console.log({argumentos});
 
 // Desestructuración de argumentos
-// La función imprimeAegumentos2 toma varios argumentos y los desestructura en variables individuales
-// const [edad, casado, vivo, nombre, apellido, nombreCompleto] = imprimeAegumentos2(10, true, false, 'Juan', 'Pérez', { nombre: 'Juan' });
+// La función imprimeArgumentos2 toma varios argumentos y los desestructura en variables individuales
+// const [edad, casado, vivo, nombre, apellido, nombreCompleto] = imprimeArgumentos2(10, true, false, 'Juan', 'Pérez', { nombre: 'Juan' });
 // console.log({edad, casado, vivo, nombre, apellido, nombreCompleto});
 
 // const { apellido } = crearPersona('Juan', 'Pérez');
