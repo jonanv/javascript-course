@@ -6,6 +6,15 @@
  */
 
 let deck = [];
+let playerPoints = 0;
+let computerPoints = 0;
+
+// Referencias HTML
+const btnNewGame = document.querySelector("#btnNewGame");
+const btnGiveCard = document.querySelector("#btnGiveCard");
+const btnStop = document.querySelector("#btnStop");
+
+const playerPointsHTML = document.querySelectorAll("small");
 
 // Esta función inicializa el deck y lo mezcla
 const createDeck = () => {
@@ -31,8 +40,8 @@ const giveCard = () => {
     }
     let card = deck.pop();
 
-    console.log(deck);
-    console.log(card);
+    // console.log(deck);
+    // console.log(card);
     return card;
 }
 
@@ -47,5 +56,26 @@ const valueCard = (card) => {
     return points;
 }
 
-let value = valueCard(giveCard());
-console.log({ value });
+// valueCard(giveCard());
+
+// Eventos
+btnGiveCard.addEventListener("click", () => {
+    const card = giveCard();
+    // console.log(card);
+    const points = valueCard(card);
+    playerPoints += points;
+    // console.log(playerPoints);
+
+    playerPointsHTML[0].innerText = playerPoints;
+
+    if (playerPoints > 21) {
+        console.warn("Perdiste");
+        btnGiveCard.disabled = true;
+        btnStop.disabled = true;
+    } else if (playerPoints === 21) {
+        console.warn("Ganaste");
+        btnGiveCard.disabled = true;
+        btnStop.disabled = true;
+    }
+});
+
