@@ -16,6 +16,9 @@ const btnStop = document.querySelector("#btnStop");
 
 const playerPointsHTML = document.querySelectorAll("small");
 
+const playerCards = document.querySelector("#player-cards");
+const computerCards = document.querySelector("#computer-cards");
+
 // Esta función inicializa el deck y lo mezcla
 const createDeck = () => {
     const types = ["C", "D", "H", "S"];
@@ -62,11 +65,16 @@ const valueCard = (card) => {
 btnGiveCard.addEventListener("click", () => {
     const card = giveCard();
     // console.log(card);
+
     const points = valueCard(card);
     playerPoints += points;
-    // console.log(playerPoints);
-
     playerPointsHTML[0].innerText = playerPoints;
+
+    // playerCards.innerHTML = `<img class="custom-card" src="assets/imgs/cartas/${card}.png">`;
+    const imgCard = document.createElement("img");
+    imgCard.src = `assets/imgs/cartas/${card}.png`;
+    imgCard.classList.add("custom-card");
+    playerCards.append(imgCard);
 
     if (playerPoints > 21) {
         console.warn("Perdiste");
