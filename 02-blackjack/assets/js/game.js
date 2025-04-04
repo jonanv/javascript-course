@@ -124,3 +124,20 @@ btnStop.addEventListener("click", () => {
         console.warn("Ganaste");
     }
 });
+
+btnNewGame.addEventListener("click", () => {
+    console.clear();
+    deck = [];
+    deck = createDeck();
+    playerPoints = 0;
+    computerPoints = 0;
+
+    smalls[0].innerText = 0;
+    smalls[1].innerText = 0;
+
+    playerCards.innerHTML = "";
+    computerCards.innerHTML = "";
+
+    btnGiveCard.disabled = false;
+    btnStop.disabled = false;
+});
