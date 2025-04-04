@@ -7,6 +7,7 @@
 
 let deck = [];
 
+// Esta función inicializa el deck y lo mezcla
 const createDeck = () => {
     const types = ["C", "D", "H", "S"];
     const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -22,3 +23,17 @@ const createDeck = () => {
 }
 
 createDeck();
+
+// Esta función me permite tomar una carta del deck
+const giveCard = () => {
+    if (deck.length === 0) {
+        throw new Error("No hay cartas en el deck");
+    }
+    let card = deck.pop();
+    
+    console.log(deck);
+    console.log(card);
+    return card;
+}
+
+giveCard();
