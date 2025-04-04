@@ -30,10 +30,22 @@ const giveCard = () => {
         throw new Error("No hay cartas en el deck");
     }
     let card = deck.pop();
-    
+
     console.log(deck);
     console.log(card);
     return card;
 }
 
-giveCard();
+// giveCard();
+
+const valueCard = (card) => {
+    const value = card.substring(0, card.length - 1);
+    const points = (isNaN(value)) 
+                    ? ((value === "A") ? 11 : 10) 
+                    : value * 1;
+    // console.log(points);
+    return points;
+}
+
+let value = valueCard(giveCard());
+console.log({ value });
