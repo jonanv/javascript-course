@@ -38,3 +38,20 @@ console.log(false || false); // false
 console.log(regresaTrue() || regresaFalse()); // true
 
 regresaTrue() || regresaFalse(); // Regresa true y no ejecuta la segunda función
+
+
+
+console.warn('Asignaciones');
+
+const soyUndefined = undefined;
+const soyNull = null;
+const soyFalse = false;
+
+let a1 = false && 'Hola mundo' && 123; // false
+let a2 = 'Hola' && 'Mundo'; // 'Mundo'
+let a3 = soyFalse || 'Ya no soy falso'; // 'Ya no soy falso'
+let a4 = soyFalse || soyUndefined || soyNull || 'Ya no soy falso de nuevo'; // 'Ya no soy falso de nuevo'
+let a5 = soyFalse || soyUndefined || regresaTrue() || 'Ya no soy falso de nuevo' || true; // Regresa true y no ejecuta la segunda función
+
+
+console.log({a1, a2, a3, a4, a5});
