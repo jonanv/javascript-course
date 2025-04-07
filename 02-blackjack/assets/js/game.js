@@ -9,60 +9,60 @@
     'use strict';
 
     let deck = [];
-    let playerPoints = 0;
-    let computerPoints = 0;
+    let playersPoints = [];
 
     // Referencias HTML
-    const btnNewGame = document.querySelector("#btnNewGame");
-    const btnGiveCard = document.querySelector("#btnGiveCard");
-    const btnStop = document.querySelector("#btnStop");
+    const btnNewGame = document.querySelector("#btnNewGame"),
+        btnGiveCard = document.querySelector("#btnGiveCard"),
+        btnStop = document.querySelector("#btnStop");
 
-    const smalls = document.querySelectorAll("small");
 
-    const playerCards = document.querySelector("#player-cards");
-    const computerCards = document.querySelector("#computer-cards");
+    const playerCards = document.querySelector("#player-cards"),
+        computerCards = document.querySelector("#computer-cards"),
+        smalls = document.querySelectorAll("small");
+
+    // Inicializa el juego
+    const initGame = (numPlayers = 2) => {
+        deck = createDeck();
+
+        for (let i = 0; i < numPlayers; i++) {
+            playersPoints.push(0);
+        }
+    }
 
     // Esta función inicializa el deck y lo mezcla
     const createDeck = () => {
-        const types = ["C", "D", "H", "S"];
-        const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+        deck = [];
+        const types = ["C", "D", "H", "S"],
+            values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
         for (let type of types) {
             for (let value of values) {
                 deck.push(value + type);
             }
         }
-        deck = _.shuffle(deck);
-        // console.log(deck);
-        return deck;
+        return _.shuffle(deck);;
     }
-
-    createDeck();
 
     // Esta función me permite tomar una carta del deck
     const giveCard = () => {
         if (deck.length === 0) {
             throw new Error("No hay cartas en el deck");
         }
-        let card = deck.pop();
-
-        // console.log(deck);
-        // console.log(card);
-        return card;
+        return deck.pop();
     }
 
-    // giveCard();
-
+    // Esta función me permite calcular el valor de la carta
     const valueCard = (card) => {
         const value = card.substring(0, card.length - 1);
-        const points = (isNaN(value))
+        return points = (isNaN(value))
             ? ((value === "A") ? 11 : 10)
             : value * 1;
-        // console.log(points);
-        return points;
     }
 
-    // valueCard(giveCard());
+    const accumulatePoints = () => {
+
+    }
 
     // Turno de la computadora
     const computerTurn = (minPoints) => {
@@ -130,8 +130,8 @@
 
     btnNewGame.addEventListener("click", () => {
         console.clear();
-        deck = [];
-        deck = createDeck();
+        initGame();
+
         playerPoints = 0;
         computerPoints = 0;
 
