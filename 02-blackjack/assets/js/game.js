@@ -73,7 +73,7 @@
             smalls[1].innerText = computerPoints;
 
             const imgCard = document.createElement("img");
-            imgCard.src = `assets/imgs/cartas/${ card }.png`;
+            imgCard.src = `assets/imgs/cartas/${card}.png`;
             imgCard.classList.add("custom-card");
             computerCards.append(imgCard);
 
@@ -94,7 +94,7 @@
 
         // playerCards.innerHTML = `<img class="custom-card" src="assets/imgs/cartas/${ card }.png">`;
         const imgCard = document.createElement("img");
-        imgCard.src = `assets/imgs/cartas/${ card }.png`;
+        imgCard.src = `assets/imgs/cartas/${card}.png`;
         imgCard.classList.add("custom-card");
         playerCards.append(imgCard);
 
