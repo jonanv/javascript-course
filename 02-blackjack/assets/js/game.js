@@ -84,13 +84,7 @@
             const card = giveCard();
             computerPoints = accumulatePoints(card, playersPoints.length - 1);
             createCardImg(card, playersPoints.length - 1);
-
-            if (minPoints > 21) {
-                break;
-            }
-
         } while ((computerPoints < minPoints) && (minPoints <= 21));
-        // console.log(computerPoints);
     }
 
     // Eventos
