@@ -5,7 +5,7 @@
 * 2S = Two of Spades (Picas)
 */
 
-(() => {
+const myModule = (() => {
     'use strict';
 
     let deck = [];
@@ -17,17 +17,23 @@
         btnStop = document.querySelector("#btnStop");
 
 
-    const playerCards = document.querySelector("#player-cards"),
-        computerCards = document.querySelector("#computer-cards"),
-        smalls = document.querySelectorAll("small");
+    const divPlayersCards = document.querySelectorAll(".divCards"),
+        pointsHTML = document.querySelectorAll("small");
 
     // Inicializa el juego
     const initGame = (numPlayers = 2) => {
+        playersPoints = [];
         deck = createDeck();
 
         for (let i = 0; i < numPlayers; i++) {
             playersPoints.push(0);
         }
+
+        pointsHTML.forEach(elem => elem.innerText = 0);
+        divPlayersCards.forEach(elem => elem.innerHTML = "");
+
+        btnGiveCard.disabled = false;
+        btnStop.disabled = false;
     }
 
     // Esta función inicializa el deck y lo mezcla
@@ -55,93 +61,91 @@
     // Esta función me permite calcular el valor de la carta
     const valueCard = (card) => {
         const value = card.substring(0, card.length - 1);
-        return points = (isNaN(value))
+        return (isNaN(value))
             ? ((value === "A") ? 11 : 10)
             : value * 1;
     }
 
-    const accumulatePoints = () => {
+    // Esta función me permite acumular los puntos de los jugadores
+    // Turno: 0 = jugador, 1 = computadora
+    const accumulatePoints = (card, turn) => {
+        playersPoints[turn] += valueCard(card);
+        pointsHTML[turn].innerText = playersPoints[turn];
+        return playersPoints[turn];
+    }
 
+    // Esta función me permite crear la imagen de la carta
+    const createCardImg = (card, turn) => {
+        // playerCards.innerHTML = `<img class="custom-card" src="assets/imgs/cartas/${ card }.png">`;
+        const imgCard = document.createElement("img");
+        imgCard.src = `assets/imgs/cartas/${ card }.png`;
+        imgCard.classList.add("custom-card");
+        divPlayersCards[turn].append(imgCard);
+    }
+
+    const determineWinner = (playersPoints) => {
+        const [playerPoints, computerPoints] = playersPoints;
+
+        if (playerPoints === computerPoints) {
+            console.warn('Empate');
+        } else if (playerPoints > 21) {
+            console.warn("Perdiste");
+        } else if (computerPoints > 21) {
+            console.warn("Ganaste");
+        } else if (playerPoints === 21) {
+            console.warn("Ganaste");
+        } else if (computerPoints === 21) {
+            console.warn("Perdiste");
+        } else if (playerPoints > computerPoints) {
+            console.warn("Ganaste");
+        } else if (computerPoints > playerPoints) {
+            console.warn("Perdiste");
+        }
     }
 
     // Turno de la computadora
     const computerTurn = (minPoints) => {
+        let computerPoints = 0;
         do {
             const card = giveCard();
-            computerPoints += valueCard(card);
-
-            smalls[1].innerText = computerPoints;
-
-            const imgCard = document.createElement("img");
-            imgCard.src = `assets/imgs/cartas/${card}.png`;
-            imgCard.classList.add("custom-card");
-            computerCards.append(imgCard);
-
-            if (minPoints > 21) {
-                break;
-            }
-
+            computerPoints = accumulatePoints(card, playersPoints.length - 1);
+            createCardImg(card, playersPoints.length - 1);
         } while ((computerPoints < minPoints) && (minPoints <= 21));
-        // console.log(computerPoints);
+        determineWinner(playersPoints);
     }
 
-    // Eventos
+    // EVENTOS
+    // Evento para obtener una nueva carta
     btnGiveCard.addEventListener("click", () => {
         const card = giveCard();
-        playerPoints += valueCard(card);
-
-        smalls[0].innerText = playerPoints;
-
-        // playerCards.innerHTML = `<img class="custom-card" src="assets/imgs/cartas/${ card }.png">`;
-        const imgCard = document.createElement("img");
-        imgCard.src = `assets/imgs/cartas/${card}.png`;
-        imgCard.classList.add("custom-card");
-        playerCards.append(imgCard);
+        const playerPoints = accumulatePoints(card, 0);
+        createCardImg(card, 0);
 
         if (playerPoints > 21) {
-            console.warn("Perdiste");
             btnGiveCard.disabled = true;
             btnStop.disabled = true;
             computerTurn(playerPoints);
         } else if (playerPoints === 21) {
-            console.warn("Ganaste");
             btnGiveCard.disabled = true;
             btnStop.disabled = true;
             computerTurn(playerPoints);
         }
     });
 
+    // Evento para detener el juego
     btnStop.addEventListener("click", () => {
         btnGiveCard.disabled = true;
         btnStop.disabled = true;
 
-        computerTurn(playerPoints);
-
-        if (computerPoints > 21) {
-            console.warn("Ganaste");
-        } else if (computerPoints === playerPoints) {
-            console.warn("Empate");
-        } else if (computerPoints > playerPoints) {
-            console.warn("Perdiste");
-        } else {
-            console.warn("Ganaste");
-        }
+        computerTurn(playersPoints[0]);
     });
 
+    // Evento para iniciar un nuevo juego
     btnNewGame.addEventListener("click", () => {
-        console.clear();
         initGame();
-
-        playerPoints = 0;
-        computerPoints = 0;
-
-        smalls[0].innerText = 0;
-        smalls[1].innerText = 0;
-
-        playerCards.innerHTML = "";
-        computerCards.innerHTML = "";
-
-        btnGiveCard.disabled = false;
-        btnStop.disabled = false;
     });
+
+    return {
+        newGame: initGame
+    };
 })();
