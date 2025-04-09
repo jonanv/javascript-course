@@ -5,7 +5,7 @@
 * 2S = Two of Spades (Picas)
 */
 
-(() => {
+const myModule = (() => {
     'use strict';
 
     let deck = [];
@@ -18,7 +18,7 @@
 
 
     const divPlayersCards = document.querySelectorAll(".divCards"),
-        smalls = document.querySelectorAll("small");
+        pointsHTML = document.querySelectorAll("small");
 
     // Inicializa el juego
     const initGame = (numPlayers = 2) => {
@@ -28,6 +28,12 @@
         for (let i = 0; i < numPlayers; i++) {
             playersPoints.push(0);
         }
+
+        pointsHTML.forEach(elem => elem.innerText = 0);
+        divPlayersCards.forEach(elem => elem.innerHTML = "");
+
+        btnGiveCard.disabled = false;
+        btnStop.disabled = false;
     }
 
     // Esta función inicializa el deck y lo mezcla
@@ -64,7 +70,7 @@
     // Turno: 0 = jugador, 1 = computadora
     const accumulatePoints = (card, turn) => {
         playersPoints[turn] += valueCard(card);
-        smalls[turn].innerText = playersPoints[turn];
+        pointsHTML[turn].innerText = playersPoints[turn];
         return playersPoints[turn];
     }
 
@@ -77,6 +83,26 @@
         divPlayersCards[turn].append(imgCard);
     }
 
+    const determineWinner = (playersPoints) => {
+        const [playerPoints, computerPoints] = playersPoints;
+
+        if (playerPoints === computerPoints) {
+            console.warn('Empate');
+        } else if (playerPoints > 21) {
+            console.warn("Perdiste");
+        } else if (computerPoints > 21) {
+            console.warn("Ganaste");
+        } else if (playerPoints === 21) {
+            console.warn("Ganaste");
+        } else if (computerPoints === 21) {
+            console.warn("Perdiste");
+        } else if (playerPoints > computerPoints) {
+            console.warn("Ganaste");
+        } else if (computerPoints > playerPoints) {
+            console.warn("Perdiste");
+        }
+    }
+
     // Turno de la computadora
     const computerTurn = (minPoints) => {
         let computerPoints = 0;
@@ -85,55 +111,41 @@
             computerPoints = accumulatePoints(card, playersPoints.length - 1);
             createCardImg(card, playersPoints.length - 1);
         } while ((computerPoints < minPoints) && (minPoints <= 21));
+        determineWinner(playersPoints);
     }
 
-    // Eventos
+    // EVENTOS
+    // Evento para obtener una nueva carta
     btnGiveCard.addEventListener("click", () => {
         const card = giveCard();
         const playerPoints = accumulatePoints(card, 0);
         createCardImg(card, 0);
 
         if (playerPoints > 21) {
-            console.warn("Perdiste");
             btnGiveCard.disabled = true;
             btnStop.disabled = true;
             computerTurn(playerPoints);
         } else if (playerPoints === 21) {
-            console.warn("Ganaste");
             btnGiveCard.disabled = true;
             btnStop.disabled = true;
             computerTurn(playerPoints);
         }
     });
 
+    // Evento para detener el juego
     btnStop.addEventListener("click", () => {
         btnGiveCard.disabled = true;
         btnStop.disabled = true;
 
-        computerTurn(playerPoints);
-
-        if (computerPoints > 21) {
-            console.warn("Ganaste");
-        } else if (computerPoints === playerPoints) {
-            console.warn("Empate");
-        } else if (computerPoints > playerPoints) {
-            console.warn("Perdiste");
-        } else {
-            console.warn("Ganaste");
-        }
+        computerTurn(playersPoints[0]);
     });
 
+    // Evento para iniciar un nuevo juego
     btnNewGame.addEventListener("click", () => {
-        console.clear();
         initGame();
-
-        // smalls[0].innerText = 0;
-        // smalls[1].innerText = 0;
-
-        // playerCards.innerHTML = "";
-        // computerCards.innerHTML = "";
-
-        // btnGiveCard.disabled = false;
-        // btnStop.disabled = false;
     });
+
+    return {
+        newGame: initGame
+    };
 })();

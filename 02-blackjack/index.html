@@ -17,8 +17,8 @@
     <div class="row mt-2">
         <div id="divButtons" class="col text-center">
             <button id="btnNewGame" class="btn btn-success">Nuevo juego</button>
-            <button id="btnGiveCard" class="btn btn-primary">Pedir carta</button>
-            <button id="btnStop" class="btn btn-danger">Detener</button>
+            <button id="btnGiveCard" disabled="disabled" class="btn btn-primary">Pedir carta</button>
+            <button id="btnStop" disabled="disabled" class="btn btn-danger">Detener</button>
         </div>
     </div>
 
@@ -48,6 +48,10 @@
 
     <script src="assets/js/underscore-umd-min.js"></script>
     <script src="assets/js/game.js"></script>
+
+    <script>
+        myModule.newGame();
+    </script>
     
 </body>
 </html>
