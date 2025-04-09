@@ -1,16 +1,16 @@
 const fher = {
     name: "Fernando",
-    edad: 30,
+    age: 30,
     print() {
-        console.log(`Nombre: ${ this.name } - edad: ${ this.edad }`);
+        console.log(`Nombre: ${ this.name } - edad: ${ this.age }`);
     }
 }
 
 const pedro = {
     name: "Pedro",
-    edad: 25,
+    age: 25,
     print() {
-        console.log(`Nombre: ${ this.name } - edad: ${ this.edad }`);
+        console.log(`Nombre: ${ this.name } - edad: ${ this.age }`);
     }
 }
 
@@ -18,12 +18,18 @@ const pedro = {
 // pedro.print();
 
 // Forma antigua de crear objetos en javascript
-function Persona(name, edad) {
-    this.name = name;
-    this.edad = edad;
+// function Person(name, age) {
+//     this.name = name;
+//     this.age = age;
 
-    this.print = function() {
-        console.log(`Nombre: ${ this.name } - edad: ${ this.edad }`);
+//     this.print = function() {
+//         console.log(`Nombre: ${ this.name } - edad: ${ this.age }`);
+//     }
+// }
+
+// const maria = new Person("Maria", 22);
+// console.log(maria);
+// maria.print();
     }
 }
 
