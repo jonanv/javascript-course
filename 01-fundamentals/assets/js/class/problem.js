@@ -30,9 +30,3 @@ const pedro = {
 // const maria = new Person("Maria", 22);
 // console.log(maria);
 // maria.print();
-    }
-}
-
-const maria = new Persona("Maria", 22);
-console.log(maria);
-maria.print();
