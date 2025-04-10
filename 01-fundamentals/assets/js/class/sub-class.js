@@ -1,4 +1,3 @@
-// Forma moderna de crear objetos en javascript
 class Person {
     // 'use strict'; // Modo estricto para evitar errores comunes ya viene activado por defecto
 
@@ -48,17 +47,24 @@ class Person {
     }
 }
 
-const spiderman = new Person('Peter Parker', 'Spiderman', 'Soy tu amigo y vecino Spiderman');
-const ironman = new Person('Tony Stark', 'Ironman', 'Yo soy Ironman');
+class Hero extends Person {
+    // Propiedades
+    clan = '';
+
+    // Constructor
+    constructor(name, code, sentence, clan) {
+        super(name, code, sentence); // Llama al constructor de la clase padre (Person)
+        this.clan = clan;
+    }
+
+    // Métodos
+    whoAmI() {
+        console.log(`Soy ${ this.name } y mi identidad es ${ this.code } del clan ${ this.clan }`);
+        super.whoAmI(); // Llama al método whoAmI de la clase padre (Person)
+    }
+}
+
+const spiderman = new Hero('Peter Parker', 'Spiderman', 'Soy tu amigo y vecino Spiderman', 'Avengers');
+console.log(spiderman);
 
 spiderman.whoAmI();
-spiderman.mySentence();
-spiderman.setFood = 'Pizza'; // Setea la comida
-console.log(spiderman.getFood); // Imprime la comida en mayúsculas
-
-// ironman.whoAmI();
-// ironman.mySentence();
-
-// Person._count = 0; // Se puede acceder a la propiedad estática de la clase directamente
-console.log('Conteo estático:', Person.count);
-Person.message();
