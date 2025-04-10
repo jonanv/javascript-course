@@ -1,4 +1,3 @@
-
 // Forma moderna de crear objetos en javascript
 class Person {
     // 'use strict'; // Modo estricto para evitar errores comunes ya viene activado por defecto
