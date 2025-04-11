@@ -7,3 +7,10 @@ This is a course follow the materia created by Fernando Herrera in his course Ja
 ## Blackjack game
 
 ![blackjack](02-blackjack/assets/imgs/image.png)
+
+## Vite
+```
+npm create vite         # Create app vite
+npm run dev             # run app
+npm run build           # create app's dist
+```
