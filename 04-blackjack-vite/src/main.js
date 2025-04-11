@@ -78,9 +78,9 @@ const myModule = (() => {
 
   // Esta función me permite crear la imagen de la carta
   const createCardImg = (card, turn) => {
-      // playerCards.innerHTML = `<img class="custom-card" src="assets/imgs/cartas/${ card }.png">`;
+      // playerCards.innerHTML = `<img class="custom-card" src="assets/imgs/cards/${ card }.png">`;
       const imgCard = document.createElement("img");
-      imgCard.src = `assets/imgs/cartas/${ card }.png`;
+      imgCard.src = `assets/imgs/cards/${ card }.png`;
       imgCard.classList.add("custom-card");
       divPlayersCards[turn].append(imgCard);
   }
