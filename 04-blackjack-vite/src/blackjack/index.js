@@ -1,9 +1,8 @@
 // import { createDeck as createNewDeck } from './usecases/create-deck.js';
 // import createDeck from './usecases/create-deck.js';
 // import createDeck, { myName } from './usecases/create-deck.js';
-import { createDeck } from './usecases/create-deck.js';
-import { giveCard } from './usecases/give-card.js';
-import { valueCard } from './usecases/value-card.js';
+
+import { createDeck, giveCard, valueCard } from './usecases';
 
 /**
 * 2C = Two of Clubs (Tréboles)
