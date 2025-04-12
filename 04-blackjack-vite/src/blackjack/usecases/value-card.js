@@ -1,4 +1,3 @@
-// Esta función me permite calcular el valor de la carta
 /**
  * @description Esta función me permite calcular el valor de la carta
  * @param {String} card 2D string que representa la carta (ejemplo: "2H", "AS", "10D")
