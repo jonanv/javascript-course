@@ -1,7 +1,8 @@
 // import { createDeck as createNewDeck } from './usecases/create-deck.js';
 // import createDeck from './usecases/create-deck.js';
 // import createDeck, { myName } from './usecases/create-deck.js';
-import { createDeck } from './usecases/create-deck.js';
+
+import { createDeck, giveCard, valueCard } from './usecases';
 
 /**
 * 2C = Two of Clubs (Tréboles)
@@ -14,6 +15,8 @@ const myModule = (() => {
     'use strict';
 
     let deck = [];
+    const types = ["C", "D", "H", "S"],
+        values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
     let playersPoints = [];
 
     // Referencias HTML
@@ -28,7 +31,7 @@ const myModule = (() => {
     // Inicializa el juego
     const initGame = (numPlayers = 2) => {
         playersPoints = [];
-        deck = createDeck();
+        deck = createDeck(types, values);
 
         for (let i = 0; i < numPlayers; i++) {
             playersPoints.push(0);
@@ -39,22 +42,6 @@ const myModule = (() => {
 
         btnGiveCard.disabled = false;
         btnStop.disabled = false;
-    }
-
-    // Esta función me permite tomar una carta del deck
-    const giveCard = () => {
-        if (deck.length === 0) {
-            throw new Error("No hay cartas en el deck");
-        }
-        return deck.pop();
-    }
-
-    // Esta función me permite calcular el valor de la carta
-    const valueCard = (card) => {
-        const value = card.substring(0, card.length - 1);
-        return (isNaN(value))
-            ? ((value === "A") ? 11 : 10)
-            : value * 1;
     }
 
     // Esta función me permite acumular los puntos de los jugadores
@@ -98,7 +85,7 @@ const myModule = (() => {
     const computerTurn = (minPoints) => {
         let computerPoints = 0;
         do {
-            const card = giveCard();
+            const card = giveCard(deck);
             computerPoints = accumulatePoints(card, playersPoints.length - 1);
             createCardImg(card, playersPoints.length - 1);
         } while ((computerPoints < minPoints) && (minPoints <= 21));
@@ -108,7 +95,7 @@ const myModule = (() => {
     // EVENTOS
     // Evento para obtener una nueva carta
     btnGiveCard.addEventListener("click", () => {
-        const card = giveCard();
+        const card = giveCard(deck);
         const playerPoints = accumulatePoints(card, 0);
         createCardImg(card, 0);
 
