@@ -104,6 +104,7 @@ export default {
     deleteCompleted,
     deleteTodo,
     getCurrentFilter,
+    getTodos,
     initStore,
     loadStore,
     setFilter,
