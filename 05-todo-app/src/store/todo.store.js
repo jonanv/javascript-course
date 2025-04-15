@@ -30,6 +30,23 @@ const initStore = () => {
 }
 
 /**
+ * @description Devuelve la lista de tareas
+ * @param {String} filter Filtro a aplicar
+ */
+const getTodos = (filter = filters.all) => {
+    switch (filter) {
+        case filters.all:
+            return [...state.todos];
+        case filters.completed:
+            return state.todos.filter(todo => todo.done);
+        case filters.pending:
+            return state.todos.filter(todo => !todo.done);
+        default:
+            throw new Error(`Filtro ${filter} no es válido`);
+    }
+}
+
+/**
  * @description Carga el store desde el localStorage
  */
 const loadStore = () => {
@@ -69,9 +86,9 @@ const deleteCompleted = () => {
 
 /**
  * @description Cambia el filtro de la aplicación
- * @param {String} newFilter Filtro a aplicar
+ * @param {String} filter Filtro a aplicar
  */
-const setFilter = (newFilter = filters.all) => {
+const setFilter = (filter = filters.all) => {
     throw new Error('Not implemented!');
 }
 
