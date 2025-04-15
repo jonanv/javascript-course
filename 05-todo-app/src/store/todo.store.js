@@ -94,7 +94,9 @@ const deleteTodo = (todoId) => {
  * @description Elimina todas las tareas completadas
  */
 const deleteCompleted = () => {
-    throw new Error('Not implemented!');
+    state.todos = state.todos.filter(todo => !todo.done);
+    console.log(state.todos);
+    return state.todos;
 }
 
 /**
