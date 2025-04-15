@@ -81,7 +81,13 @@ const toggleTodo = (todoId) => {
  * @param {String} todoId Id de la tarea a eliminar
  */
 const deleteTodo = (todoId) => {
-    throw new Error('Not implemented!');
+    if (!todoId) throw new Error('Id is required');
+    const index = state.todos.findIndex(todo => todo.id === todoId);
+    if (index === -1) throw new Error(`Todo with id ${todoId} not found`);
+
+    state.todos.splice(index, 1);
+    console.log(state.todos);
+    return state.todos;
 }
 
 /**
