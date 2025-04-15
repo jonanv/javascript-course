@@ -32,6 +32,7 @@ const initStore = () => {
 /**
  * @description Devuelve la lista de tareas
  * @param {String} filter Filtro a aplicar
+ * @return {Array<Todo>} Lista de tareas
  */
 const getTodos = (filter = filters.all) => {
     switch (filter) {
@@ -58,7 +59,13 @@ const loadStore = () => {
  * @param {String} description Descripción de la tarea
  */
 const addTodo = (description) => {
-    throw new Error('Not implemented!');
+    if (!description) throw new Error('Description is required');
+    if (state.todos.some(todo => todo.description === description)) throw new Error(`Todo ${description} already exists`);
+
+    const newTodo = new Todo(description);
+    state.todos.push(newTodo);
+    console.log(state.todos);
+    return newTodo;
 }
 
 /**
