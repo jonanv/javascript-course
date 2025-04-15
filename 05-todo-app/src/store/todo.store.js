@@ -1,11 +1,17 @@
 import { Todo } from "../todos/models/todo.model";
 
+/**
+ * @description Filtros de la aplicación
+ */
 const filters = {
     all: 'all',
     completed: 'completed',
     pending: 'pending'
 }
 
+/**
+ * @description Estado de la aplicación
+ */
 const state = {
     todos: [
         new Todo('Piedra del alma'),
@@ -15,11 +21,74 @@ const state = {
     filter: filters.all,
 }
 
+/**
+ * @description Inicializa el store
+ */
 const initStore = () => {
     console.log(state);
     console.log('InitStore 🗽');
 }
 
+/**
+ * @description Carga el store desde el localStorage
+ */
+const loadStore = () => {
+    throw new Error('Not implemented!');
+}
+
+/**
+ * @description Crea una nueva tarea
+ * @param {String} description Descripción de la tarea
+ */
+const addTodo = (description) => {
+    throw new Error('Not implemented!');
+}
+
+/**
+ * @description Marca o desmarca una tarea como completada
+ * @param {String} id Id de la tarea a marcar/desmarcar
+ */
+const toggleTodo = (todoId) => {
+    throw new Error('Not implemented!');
+}
+
+/**
+ * @description Elimina una tarea
+ * @param {String} todoId Id de la tarea a eliminar
+ */
+const deleteTodo = (todoId) => {
+    throw new Error('Not implemented!');
+}
+
+/**
+ * @description Elimina todas las tareas completadas
+ */
+const deleteCompleted = () => {
+    throw new Error('Not implemented!');
+}
+
+/**
+ * @description Cambia el filtro de la aplicación
+ * @param {String} newFilter Filtro a aplicar
+ */
+const setFilter = (newFilter = filters.all) => {
+    throw new Error('Not implemented!');
+}
+
+/**
+ * @description Devuelve el filtro actual
+ */
+const getCurrentFilter = () => {
+    throw new Error('Not implemented!');
+}
+
 export default {
-    initStore
+    addTodo,
+    deleteCompleted,
+    deleteTodo,
+    getCurrentFilter,
+    initStore,
+    loadStore,
+    setFilter,
+    toggleTodo,
 }
