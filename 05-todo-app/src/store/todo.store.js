@@ -57,6 +57,7 @@ const loadStore = () => {
 /**
  * @description Crea una nueva tarea
  * @param {String} description Descripción de la tarea
+ * @return {Todo} Nueva tarea
  */
 const addTodo = (description) => {
     if (!description) throw new Error('Description is required');
@@ -79,6 +80,7 @@ const toggleTodo = (todoId) => {
 /**
  * @description Elimina una tarea
  * @param {String} todoId Id de la tarea a eliminar
+ * @return {Array<Todo>} Lista de tareas
  */
 const deleteTodo = (todoId) => {
     if (!todoId) throw new Error('Id is required');
@@ -92,6 +94,7 @@ const deleteTodo = (todoId) => {
 
 /**
  * @description Elimina todas las tareas completadas
+ * @return {Array<Todo>} Lista de tareas
  */
 const deleteCompleted = () => {
     state.todos = state.todos.filter(todo => !todo.done);
@@ -102,6 +105,7 @@ const deleteCompleted = () => {
 /**
  * @description Cambia el filtro de la aplicación
  * @param {String} filter Filtro a aplicar
+ * @return {String} Filtro actual
  */
 const setFilter = (filter = filters.all) => {
     const validFilters = Object.values(filters);
@@ -114,6 +118,7 @@ const setFilter = (filter = filters.all) => {
 
 /**
  * @description Devuelve el filtro actual
+ * @return {String} Filtro actual
  */
 const getCurrentFilter = () => {
     return state.filter;
