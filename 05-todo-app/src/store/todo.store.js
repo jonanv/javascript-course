@@ -104,7 +104,12 @@ const deleteCompleted = () => {
  * @param {String} filter Filtro a aplicar
  */
 const setFilter = (filter = filters.all) => {
-    throw new Error('Not implemented!');
+    const validFilters = Object.values(filters);
+    if (!validFilters.includes(filter)) throw new Error(`Filter ${filter} is not valid`);
+
+    state.filter = filter;
+    console.log(state.filter);
+    return state.filter;
 }
 
 /**
