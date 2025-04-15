@@ -74,7 +74,14 @@ const addTodo = (description) => {
  * @param {String} id Id de la tarea a marcar/desmarcar
  */
 const toggleTodo = (todoId) => {
-    throw new Error('Not implemented!');
+    if (!todoId) throw new Error('Id is required');
+    
+    const todo = state.todos.find(todo => todo.id === todoId);
+    if (!todo) throw new Error(`Todo with id ${todoId} not found`);
+
+    todo.done = !todo.done;
+    console.log(state.todos);
+    return todo;
 }
 
 /**
