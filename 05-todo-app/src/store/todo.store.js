@@ -116,7 +116,7 @@ const setFilter = (filter = filters.all) => {
  * @description Devuelve el filtro actual
  */
 const getCurrentFilter = () => {
-    throw new Error('Not implemented!');
+    return state.filter;
 }
 
 export default {
