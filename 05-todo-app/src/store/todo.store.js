@@ -80,7 +80,6 @@ const toggleTodo = (todoId) => {
     if (!todo) throw new Error(`Todo with id ${todoId} not found`);
 
     todo.done = !todo.done;
-    console.log(state.todos);
     return todo;
 }
 
@@ -95,7 +94,6 @@ const deleteTodo = (todoId) => {
     if (index === -1) throw new Error(`Todo with id ${todoId} not found`);
 
     state.todos.splice(index, 1);
-    console.log(state.todos);
     return state.todos;
 }
 
