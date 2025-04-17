@@ -10,8 +10,14 @@ export const createTodoHtml = (todo) => {
     li.setAttribute('data-id', todo.id);
     li.className = 'todo-item';
     li.innerHTML = `
-        <span>${todo.description}</span>
-        <button class="delete-btn">X</button>
+        <li class="${ todo.done }" data-id="abc">
+            <div class="view">
+                <input class="toggle" type="checkbox" checked>
+                <label>${ todo.description }</label>
+                <button class="destroy"></button>
+            </div>
+            <input class="edit" value="Create a TodoMVC template">
+        </li>
     `;
     return li;
 }
