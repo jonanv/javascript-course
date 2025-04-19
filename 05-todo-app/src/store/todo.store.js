@@ -3,7 +3,7 @@ import { Todo } from "../todos/models/todo.model";
 /**
  * @description Filtros de la aplicación
  */
-const filters = {
+export const filters = {
     all: 'all',
     completed: 'completed',
     pending: 'pending'
