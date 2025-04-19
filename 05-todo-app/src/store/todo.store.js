@@ -48,7 +48,6 @@ const initStore = () => {
     console.log('InitStore 🗽');
 }
 
-
 /**
  * @description Carga el store desde el localStorage
  */
