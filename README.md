@@ -15,6 +15,6 @@ npm run dev             # run app
 npm run build           # create app's dist
 ```
 
-# TODO app
+# Todo app
 
 ![todo-app](05-todo-app/src/assets/imgs/image.png)
