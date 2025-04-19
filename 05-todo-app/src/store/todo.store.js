@@ -22,17 +22,9 @@ const state = {
 }
 
 /**
- * @description Inicializa el store
- */
-const initStore = () => {
-    console.log(state);
-    console.log('InitStore 🗽');
-}
-
-/**
- * @description Devuelve la lista de tareas
+ * @description Devuelve la lista de tareas filtradas
  * @param {String} filter Filtro a aplicar
- * @return {Array<Todo>} Lista de tareas
+ * @return {Array<Todo>} Lista de tareas filtradas
  */
 const getTodos = (filter = filters.all) => {
     switch (filter) {
@@ -48,10 +40,30 @@ const getTodos = (filter = filters.all) => {
 }
 
 /**
+ * @description Inicializa el store
+ */
+const initStore = () => {
+    loadStore();
+    console.log(state);
+    console.log('InitStore 🗽');
+}
+
+
+/**
  * @description Carga el store desde el localStorage
  */
 const loadStore = () => {
-    throw new Error('Not implemented!');
+    if (!localStorage.getItem('state')) return;
+    const { todos = [], filter = filters.all } = JSON.parse(localStorage.getItem('state'));
+    state.todos = todos;
+    state.filter = filter;
+}
+
+/**
+ * @description Guarda el store en el localStorage
+ */
+const saveTodosToLocalStorage = () => {
+    localStorage.setItem('state', JSON.stringify(state));
 }
 
 /**
@@ -66,6 +78,7 @@ const addTodo = (description) => {
     const newTodo = new Todo(description);
     state.todos.push(newTodo);
     console.log(state.todos);
+    saveTodosToLocalStorage();
     return newTodo;
 }
 
@@ -80,6 +93,7 @@ const toggleTodo = (todoId) => {
     if (!todo) throw new Error(`Todo with id ${todoId} not found`);
 
     todo.done = !todo.done;
+    saveTodosToLocalStorage();
     return todo;
 }
 
@@ -94,6 +108,7 @@ const deleteTodo = (todoId) => {
     if (index === -1) throw new Error(`Todo with id ${todoId} not found`);
 
     state.todos.splice(index, 1);
+    saveTodosToLocalStorage();
     return state.todos;
 }
 
@@ -104,6 +119,7 @@ const deleteTodo = (todoId) => {
 const deleteCompleted = () => {
     state.todos = state.todos.filter(todo => !todo.done);
     console.log(state.todos);
+    saveTodosToLocalStorage();
     return state.todos;
 }
 
