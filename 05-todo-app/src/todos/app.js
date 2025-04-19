@@ -1,10 +1,13 @@
 import html from './app.html?raw';
-import todoStore from '../store/todo.store';
-import { renderTodos } from './use-cases';
+import todoStore, { filters } from '../store/todo.store';
+import { renderTodos, renderPending } from './use-cases';
 
 const elementIds = {
     todoList: '.todo-list',
     newTodoInput: '#new-todo-input',
+    clearCompletedButton: '.clear-completed',
+    todoFilters: '.filtro',
+    pendingCountLabel: '#pending-count',
 }
 
 /**
@@ -13,9 +16,15 @@ const elementIds = {
  */
 export const App = (elementId) => {
     if (!elementId) throw new Error('ElementId is required');
+
     const displayTodos = () => {
         const todos = todoStore.getTodos(todoStore.getCurrentFilter());
         renderTodos(elementIds.todoList, todos);
+        updatePendingCount();
+    }
+
+    const updatePendingCount = () => {
+        renderPending(elementIds.pendingCountLabel);
     }
 
     (() => {
@@ -28,6 +37,8 @@ export const App = (elementId) => {
     // Referencias HTML
     const newTodoInput = document.querySelector(elementIds.newTodoInput);
     const todoList = document.querySelector(elementIds.todoList);
+    const clearCompletedButton = document.querySelector(elementIds.clearCompletedButton);
+    const todoFilters = document.querySelectorAll(elementIds.todoFilters);
 
     // Eventos
     newTodoInput.addEventListener('keyup', (event) => {
@@ -56,6 +67,31 @@ export const App = (elementId) => {
         const todoId = element.getAttribute('data-id');
         todoStore.deleteTodo(todoId);
         displayTodos();
+    });
+
+    clearCompletedButton.addEventListener('click', () => {
+        todoStore.deleteCompleted();
+        displayTodos();
+    });
+
+    todoFilters.forEach((element) => {
+        element.addEventListener('click', (event) => {
+            todoFilters.forEach(el => el.classList.remove('selected'));
+            event.target.classList.add('selected');
+            
+            switch (event.target.text) {
+                case 'Todos':
+                    todoStore.setFilter(filters.all);
+                    break;
+                case 'Pendientes':
+                    todoStore.setFilter(filters.pending);
+                    break;
+                case 'Completados':
+                    todoStore.setFilter(filters.completed);
+                    break;
+            }
+            displayTodos();
+        });
     });
 
 };

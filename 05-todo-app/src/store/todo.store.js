@@ -3,7 +3,7 @@ import { Todo } from "../todos/models/todo.model";
 /**
  * @description Filtros de la aplicación
  */
-const filters = {
+export const filters = {
     all: 'all',
     completed: 'completed',
     pending: 'pending'
@@ -25,14 +25,32 @@ const state = {
  * @description Inicializa el store
  */
 const initStore = () => {
-    console.log(state);
+    loadStore();
     console.log('InitStore 🗽');
 }
 
 /**
- * @description Devuelve la lista de tareas
+ * @description Carga el store desde el localStorage
+ */
+const loadStore = () => {
+    if (!localStorage.getItem('state')) return;
+
+    const { todos = [], filter = filters.all } = JSON.parse(localStorage.getItem('state'));
+    state.todos = todos;
+    state.filter = filter;
+}
+
+/**
+ * @description Guarda el store en el localStorage
+ */
+const saveTodosToLocalStorage = () => {
+    localStorage.setItem('state', JSON.stringify(state));
+}
+
+/**
+ * @description Devuelve la lista de tareas filtradas
  * @param {String} filter Filtro a aplicar
- * @return {Array<Todo>} Lista de tareas
+ * @return {Array<Todo>} Lista de tareas filtradas
  */
 const getTodos = (filter = filters.all) => {
     switch (filter) {
@@ -48,16 +66,8 @@ const getTodos = (filter = filters.all) => {
 }
 
 /**
- * @description Carga el store desde el localStorage
- */
-const loadStore = () => {
-    throw new Error('Not implemented!');
-}
-
-/**
  * @description Crea una nueva tarea
  * @param {String} description Descripción de la tarea
- * @return {Todo} Nueva tarea
  */
 const addTodo = (description) => {
     if (!description) throw new Error('Description is required');
@@ -65,8 +75,8 @@ const addTodo = (description) => {
 
     const newTodo = new Todo(description);
     state.todos.push(newTodo);
-    console.log(state.todos);
-    return newTodo;
+    
+    saveTodosToLocalStorage();
 }
 
 /**
@@ -80,13 +90,13 @@ const toggleTodo = (todoId) => {
     if (!todo) throw new Error(`Todo with id ${todoId} not found`);
 
     todo.done = !todo.done;
-    return todo;
+    
+    saveTodosToLocalStorage();
 }
 
 /**
  * @description Elimina una tarea
  * @param {String} todoId Id de la tarea a eliminar
- * @return {Array<Todo>} Lista de tareas
  */
 const deleteTodo = (todoId) => {
     if (!todoId) throw new Error('Id is required');
@@ -94,31 +104,28 @@ const deleteTodo = (todoId) => {
     if (index === -1) throw new Error(`Todo with id ${todoId} not found`);
 
     state.todos.splice(index, 1);
-    return state.todos;
+    saveTodosToLocalStorage();
 }
 
 /**
  * @description Elimina todas las tareas completadas
- * @return {Array<Todo>} Lista de tareas
  */
 const deleteCompleted = () => {
     state.todos = state.todos.filter(todo => !todo.done);
-    console.log(state.todos);
-    return state.todos;
+    saveTodosToLocalStorage();
 }
 
 /**
  * @description Cambia el filtro de la aplicación
  * @param {String} filter Filtro a aplicar
- * @return {String} Filtro actual
  */
 const setFilter = (filter = filters.all) => {
     const validFilters = Object.values(filters);
     if (!validFilters.includes(filter)) throw new Error(`Filter ${filter} is not valid`);
 
     state.filter = filter;
-    console.log(state.filter);
-    return state.filter;
+
+    saveTodosToLocalStorage();
 }
 
 /**
