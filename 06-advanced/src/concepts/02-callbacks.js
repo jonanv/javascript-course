@@ -6,8 +6,9 @@ import { heroes } from '../data/heroes';
  */
 export const callbacksComponent = (element) => {
     
-    const id = '5d86371f25a058e5b1c8a65e';
-    findHeroe(id, (error, heroe) => {
+    const id1 = '5d86371f25a058e5b1c8a65e';
+    const id2 = '5d86371f233c9f2425f16916';
+    findHeroe(id1, (error, heroe1) => {
         // element.innerHTML = heroe?.name || 'No se ha encontrado el heroe';
         // element.innerHTML = heroe?.name || error;
 
@@ -15,7 +16,14 @@ export const callbacksComponent = (element) => {
             element.innerHTML = error;
             return;
         }
-        element.innerHTML = heroe.name;
+
+        findHeroe(id2, (error, heroe2) => {
+            if (error) {
+                element.innerHTML = error;
+                return;
+            }
+            element.innerHTML = `${ heroe1.name } / ${ heroe2.name }`;
+        });
     });
 }
 
