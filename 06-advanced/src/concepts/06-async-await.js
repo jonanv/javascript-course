@@ -7,12 +7,17 @@ import { heroes } from "../data/heroes";
 export const asyncAwaitComponent = async (element) => {
     
     const id1 = '5d86371f233c9f2425f16916';
-    const id2 = '5d86371f25a058e5b1c8a65e';
-    
-    const { name: name1 } = await findHero(id1);
-    const { name: name2 } = await findHero(id2);
+    const id2 = '5d86371f25a058e5b1c8a65e22';
 
-    element.innerHTML = `${ name1 } / ${ name2 }`;
+    try {
+        const { name: name1 } = await findHero(id1);
+        const { name: name2 } = await findHero(id2);
+    
+        element.innerHTML = `${ name1 } / ${ name2 }`;
+    } catch (error) {
+        element.innerHTML = error.message;
+    }
+    
 
 }
 
