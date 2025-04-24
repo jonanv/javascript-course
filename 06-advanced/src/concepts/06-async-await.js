@@ -18,7 +18,6 @@ export const asyncAwaitComponent = async (element) => {
         element.innerHTML = error.message;
     }
     
-
 }
 
 
