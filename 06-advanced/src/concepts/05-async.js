@@ -20,5 +20,8 @@ export const asyncComponent = (element) => {
  */
 const findHero = async (id) => {
     const hero = heroes.find(hero => hero.id === id);
+    if (!hero)
+        throw new Error(`Heroe con id ${id} no encontrado`);
+
     return hero.name;
 }
