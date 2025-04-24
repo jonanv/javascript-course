@@ -18,3 +18,7 @@ npm run build           # create app's dist
 # Todo app
 
 ![todo-app](05-todo-app/src/assets/imgs/image.png)
+
+
+# Advanced
+![advanced](06-advanced/src/assets/imgs/image.png)
