@@ -43,6 +43,6 @@ const fetchQuote = async() => {
     const res = await fetch(apiURL);
     const data = await res.json();
 
-    console.log(data[0]);
+    // console.log(data[0]);
     return data[0];
 }
