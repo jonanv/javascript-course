@@ -18,11 +18,17 @@ export const BreakingBadApp = async(element) => {
     const nextQuoteButton = document.createElement('button');
     nextQuoteButton.innerHTML = 'Next Quote';
 
-    const renderQuote = (data) => {
-        quoteElement.innerHTML = data[0].quote;
-        authorElement.innerHTML = data[0].author;
+    const renderQuote = ({ quote, author }) => {
+        quoteElement.innerHTML = quote;
+        authorElement.innerHTML = author;
         element.replaceChildren(quoteElement, authorElement, nextQuoteButton);
     }
+
+    nextQuoteButton.addEventListener('click', async() => {
+        element.innerHTML = 'Loading...';
+        const quote = await fetchQuote();
+        renderQuote(quote);
+    });
 
     fetchQuote()
         .then(renderQuote);
@@ -36,6 +42,7 @@ export const BreakingBadApp = async(element) => {
 const fetchQuote = async() => {
     const res = await fetch(apiURL);
     const data = await res.json();
-    console.log(data);
-    return data;
+
+    console.log(data[0]);
+    return data[0];
 }
