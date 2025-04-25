@@ -11,13 +11,21 @@ export const BreakingBadApp = async(element) => {
 
     element.innerHTML = 'Loading...';
 
-    const quote = await fetchQuote();
+    // const quote = await fetchQuote();
 
-    element.innerHTML = `
-        <h1>${quote[0].quote}</h1>
-        <h3>${quote[0].author}</h3>
-        <button id="btnQuote">Get another quote</button>
-    `;
+    const quoteElement = document.createElement('blockquote');
+    const authorElement = document.createElement('h3');
+    const nextQuoteButton = document.createElement('button');
+    nextQuoteButton.innerHTML = 'Next Quote';
+
+    const renderQuote = (data) => {
+        quoteElement.innerHTML = data[0].quote;
+        authorElement.innerHTML = data[0].author;
+        element.replaceChildren(quoteElement, authorElement, nextQuoteButton);
+    }
+
+    fetchQuote()
+        .then(renderQuote);
 
 };
 
