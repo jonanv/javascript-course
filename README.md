@@ -22,3 +22,9 @@ npm run build           # create app's dist
 
 # Advanced
 ![advanced](06-advanced/src/assets/imgs/image.png)
+
+
+# Crud App
+```
+npm run server  # run json-server
+```
