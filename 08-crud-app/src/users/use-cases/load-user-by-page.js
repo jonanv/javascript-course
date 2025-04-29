@@ -1,6 +1,9 @@
+import { localhostUserMapper } from "../mappers/localhost-user.mapper";
+
 /**
  * @description Carga los usuarios de una página específica
  * @param {Number} page Numero de página a cargar 
+ * @return {Promise<User[]>} Lista de usuarios
  */
 export const loadUsersByPage = async(page = 1) => {
 
@@ -8,5 +11,7 @@ export const loadUsersByPage = async(page = 1) => {
     const response = await fetch(url);
     const data = await response.json();
 
-    console.log(data);
+    const users = data.data.map(localhostUserMapper);
+    
+    return users;
 }
