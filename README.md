@@ -26,5 +26,5 @@ npm run build           # create app's dist
 
 # Crud App
 ```
-npm run server  # run json-server
+npm run server           # run json-server
 ```
