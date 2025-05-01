@@ -21,7 +21,7 @@ export const saveUser = async(userLike) => {
 /**
  * @description Crea un nuevo usuario en la API
  * @param {Like<User>} user 
- * @returns {Promise<User>} 
+ * @return {Promise<User>} 
  */
 export const createuser = async(user) => {
     const url = `${ import.meta.env.VITE_API_URL }/users`;
