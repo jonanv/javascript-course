@@ -8,16 +8,15 @@ let form;
  * @description Muestra el modal
  */
 export const showModal = () => {
-    if (!modal) return;
-    modal.classList.remove('hide-modal');
+    modal?.classList.remove('hide-modal');
 };
 
 /**
  * @description Cierra el modal
  */
 export const hideModal = () => {
-    if (!modal) return;
-    modal.classList.add('hide-modal');
+    modal?.classList.add('hide-modal');
+    form?.reset();
 }
 
 /**
@@ -45,9 +44,23 @@ export const renderModal = (element) => {
     const form = document.querySelector('form');
     form.addEventListener('submit', (event) => {
         event.preventDefault();
+
         const formData = new FormData(form);
-        const user = Object.fromEntries(formData.entries());
-        console.log(user);
+        let userLike = {};
+        for (const [key, value] of formData.entries()) {
+            if (key === 'balance') {
+                userLike[key] = +(value);
+                continue;
+            }
+
+            if (key === 'isActive') {
+                userLike[key] = (value === 'on') ? true : false;
+                continue;
+            }
+
+            userLike[key] = value;
+        }
+        
         hideModal();
     });
 }
