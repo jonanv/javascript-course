@@ -2,6 +2,7 @@ import './render-modal.css';
 import modalHtml from './render-modal.html?raw';
 
 let modal;
+let form;
 
 /**
  * @description Muestra el modal
@@ -32,4 +33,21 @@ export const renderModal = (element) => {
     modal.className = 'modal-container hide-modal';
 
     element.append(modal);
+
+    // Event listener for the close button
+    modal.addEventListener('click', (event) => {
+        if (event.target.className === 'modal-container') {
+            hideModal();
+        }
+    });
+
+    // Event listener for the save button
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const user = Object.fromEntries(formData.entries());
+        console.log(user);
+        hideModal();
+    });
 }
