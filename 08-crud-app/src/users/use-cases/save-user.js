@@ -7,9 +7,13 @@ import { User } from "../models/user";
  */
 export const saveUser = async(userLike) => {
     const user = new User(userLike);
+
+    if (!user.firstName || !user.lastName)
+        throw new Error('El nombre y apellido son obligatorios');
+    
     const userToSave = userToLocalhostMapper(user);
 
-    if (userToSave.id) {
+    if (user.id) {
         throw new Error('No implementado');
         return;
     }
