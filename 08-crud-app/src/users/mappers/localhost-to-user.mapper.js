@@ -2,10 +2,10 @@ import { User } from "../models/user"
 
 /**
  * @description Mapea el objeto de usuario a la clase User
- * @param {Object<User>} localhostUser Objeto de usuario
+ * @param {Like<User>} localhostUser Objeto de usuario
  * @returns {User} Objeto de usuario mapeado a la clase User
  */
-export const localhostUserMapper = (localhostUser) => {
+export const localhostToUserMapper = (localhostUser) => {
 
     const {
         avatar,
@@ -26,5 +26,4 @@ export const localhostUserMapper = (localhostUser) => {
         isActive,
         lastName: last_name,
     });
-
 }

@@ -1,4 +1,5 @@
 import './render-add-button.css';
+import { showModal } from '../render-modal/render-modal';
 
 /**
  * @description Renderiza el botón de añadir usuario
@@ -13,6 +14,6 @@ export const renderAddButton = (element) => {
 
     // Event listener for the add button
     fabButton.addEventListener('click', () => {
-        throw new Error('Add user functionality not implemented yet!');
+        showModal();
     });
 }

@@ -1,5 +1,4 @@
 export class User {
-
     /**
      * @description Clase que representa un usuario
      * @param {Object<User>} user Objeto de usuario
@@ -13,5 +12,4 @@ export class User {
         this.lastName = lastName;
         this.gender = gender;    
     }
-
 }
