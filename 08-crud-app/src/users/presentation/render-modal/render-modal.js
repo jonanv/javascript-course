@@ -1,14 +1,23 @@
 import './render-modal.css';
 import modalHtml from './render-modal.html?raw';
+import { User } from '../../models/user';
+import { getUserById } from '../../use-cases/get-user-by-id';
 
 let modal;
 let form;
+let loadUser = {};
 
 /**
  * @description Muestra el modal
+ * @param {String | Number} id ID del modal
  */
-export const showModal = () => {
+export const showModal = async(id) => {
     modal?.classList.remove('hide-modal');
+    loadUser = {};
+
+    if (!id) return;
+    const user = await getUserById(id);
+    setFormValues(user);
 };
 
 /**
@@ -17,6 +26,21 @@ export const showModal = () => {
 export const hideModal = () => {
     modal?.classList.add('hide-modal');
     form?.reset();
+}
+
+/**
+ * @description Setea los valores del formulario con los datos del usuario
+ * @param {User} user 
+ */
+export const setFormValues = (user) => {
+    const { id, isActive, balance, firstName, lastName } = user;
+
+    const form = document.querySelector('form');
+    form.querySelector('input[name="firstName"]').value = firstName;
+    form.querySelector('input[name="lastName"]').value = lastName;
+    form.querySelector('input[name="balance"]').value = balance;
+    form.querySelector('input[name="isActive"]').checked = isActive;
+    loadUser = user;
 }
 
 /**
@@ -47,7 +71,8 @@ export const renderModal = (element, callback) => {
         event.preventDefault();
 
         const formData = new FormData(form);
-        let userLike = {};
+        let userLike = { ...loadUser};
+        
         for (const [key, value] of formData.entries()) {
             if (key === 'balance') {
                 userLike[key] = +(value);

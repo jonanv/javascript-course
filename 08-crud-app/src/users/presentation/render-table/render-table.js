@@ -1,7 +1,21 @@
 import './render-table.css';
 import userStore from '../../store/user-store';
+import { showModal } from '../render-modal/render-modal';
 
 let table;
+
+/**
+ * @description Listener para el evento de click en la tabla
+ * @param {MouseEvent} event Evento del click
+ */
+const tableSelectListener = (event) => {
+    const element = event.target.closest('.select-user');
+    if (!element) return;
+    
+    // const id = element.dataset.id;
+    const id = element.getAttribute('data-id');
+    showModal(id);
+}
 
 /**
  * @description Renderiza una tabla con los datos de los usuarios
@@ -14,7 +28,9 @@ export const renderTable = (element) => {
         table = createTable();
         element.append(table);
 
-        // TODO: add event listeners to the table rows
+        // Event listener
+        table.addEventListener('click', tableSelectListener);
+
     }
 
     let tableHTML = '';
@@ -28,9 +44,9 @@ export const renderTable = (element) => {
                 <td>${ lastName }</td>
                 <td>${ isActive ? 'Active' : 'Inactive' }</td>
                 <td>
-                    <a href="#/" data-id=${ id }>Select</a>
+                    <a href="#/" class="select-user" data-id=${ id }>Select</a>
                     |
-                    <a href="#/" data-id=${ id }>Delete</a>
+                    <a href="#/" class="delete-user" data-id=${ id }>Delete</a>
                 </td>
             </tr>`;
     });
