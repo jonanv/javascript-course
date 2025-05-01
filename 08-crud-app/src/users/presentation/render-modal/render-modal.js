@@ -22,8 +22,9 @@ export const hideModal = () => {
 /**
  * @description Renderiza un modal para añadir o editar un usuario
  * @param {HTMLDivElement} element Elemento HTML donde se renderiza el modal
+ * @param {(userLike) => Promise<void>} callback Función que se ejecuta al guardar el usuario
  */
-export const renderModal = (element) => {
+export const renderModal = (element, callback) => {
 
     if (modal) return;
 
@@ -42,7 +43,7 @@ export const renderModal = (element) => {
 
     // Event listener for the save button
     const form = document.querySelector('form');
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async(event) => {
         event.preventDefault();
 
         const formData = new FormData(form);
@@ -60,7 +61,8 @@ export const renderModal = (element) => {
 
             userLike[key] = value;
         }
-        
+
+        await callback(userLike);
         hideModal();
     });
 }

@@ -23,14 +23,14 @@ export const saveUser = async(userLike) => {
  * @param {Like<User>} user 
  * @return {Promise<User>} 
  */
-export const createuser = async(user) => {
-    const url = `${ import.meta.env.VITE_API_URL }/users`;
+export const createUser = async(user) => {
+    const url = `${ import.meta.env.VITE_BASE_URL }/users`;
     const response = await fetch(url, {
         method: 'POST',
+        body: JSON.stringify(user),
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
+        }
     });
 
     const newUser = await response.json();
