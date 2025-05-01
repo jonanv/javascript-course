@@ -1,4 +1,4 @@
-import { localhostUserMapper } from "../mappers/localhost-user.mapper";
+import { localhostToUserMapper } from "../mappers/localhost-to-user.mapper";
 
 /**
  * @description Carga los usuarios de una página específica
@@ -11,7 +11,7 @@ export const loadUsersByPage = async(page = 1) => {
     const response = await fetch(url);
     const data = await response.json();
 
-    const users = data.data.map(localhostUserMapper);
+    const users = data.data.map(localhostToUserMapper);
     
     return users;
 }
