@@ -13,6 +13,8 @@ export const renderTable = (element) => {
     if (!table) {
         table = createTable();
         element.append(table);
+
+        // TODO: add event listeners to the table rows
     }
 
     let tableHTML = '';

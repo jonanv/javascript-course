@@ -14,5 +14,4 @@ export const UsersApp = async(element) => {
 
     renderTable(element);
     renderButtons(element);
-
 }
