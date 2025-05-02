@@ -21,8 +21,24 @@ const loadPreviousPage = async() => {
     state.users = users;
 }
 
-const onUserChanged = () => {
-    throw new Error('Not implemented yet');
+/**
+ * @description Renderiza la tabla de usuarios
+ * @param {User} updateUser Usuario a guardar
+ */
+const onUserChanged = (updateUser) => {
+    let wasFound = false;
+
+    state.users = state.users.map((user) => {
+        if (user.id === updateUser.id) {
+            wasFound = true;
+            return updateUser;
+        }
+        return user;
+    });
+
+    if (state.users.length < 10 && !wasFound) {
+        state.users.push(updateUser);
+    }
 }
 
 const reloadPage = async() => {
