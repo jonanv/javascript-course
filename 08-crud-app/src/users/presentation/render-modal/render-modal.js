@@ -9,7 +9,7 @@ let loadUser = {};
 
 /**
  * @description Muestra el modal
- * @param {String | Number} id ID del modal
+ * @param {String|Number} id ID del modal
  */
 export const showModal = async(id) => {
     modal?.classList.remove('hide-modal');

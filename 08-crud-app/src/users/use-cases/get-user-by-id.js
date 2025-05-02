@@ -3,7 +3,7 @@ import { localhostToUserMapper } from "../mappers/localhost-to-user.mapper";
 
 /**
  * @description Obtiene un usuario por su id
- * @param {String | Number} id Id del usuario a buscar
+ * @param {String|Number} id Id del usuario a buscar
  * @return {Promise<User>} Usuario
  */
 export const getUserById = async(id) => {
