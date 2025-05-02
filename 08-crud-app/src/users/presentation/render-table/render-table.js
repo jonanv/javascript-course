@@ -1,7 +1,44 @@
 import './render-table.css';
 import userStore from '../../store/user-store';
+import { showModal } from '../render-modal/render-modal';
+import { deleteUserById } from '../../use-cases/delete-user-by-id';
 
 let table;
+
+/**
+ * @description Listener para el evento de click (select) en la tabla
+ * @param {MouseEvent} event Evento del click
+ */
+const tableSelectListener = (event) => {
+    const element = event.target.closest('.select-user');
+    if (!element) return;
+    
+    // const id = element.dataset.id;
+    const id = element.getAttribute('data-id');
+    showModal(id);
+}
+
+/**
+ * @description Listener para el evento de click (delete) en la tabla
+ * @param {MouseEvent} event Evento del click
+ */
+const tableDeleteListener = async(event) => {
+    const element = event.target.closest('.delete-user');
+    if (!element) return;
+    
+    // const id = element.dataset.id;
+    const id = element.getAttribute('data-id');
+    
+    try {
+        await deleteUserById(id);
+        await userStore.reloadPage();
+        document.querySelector('#current-page').innerText = userStore.getCurrentPage();
+        renderTable();
+    } catch (error) {
+        console.log(error);
+        alert('No se pudo eliminar el usuario');
+    }
+}
 
 /**
  * @description Renderiza una tabla con los datos de los usuarios
@@ -14,7 +51,10 @@ export const renderTable = (element) => {
         table = createTable();
         element.append(table);
 
-        // TODO: add event listeners to the table rows
+        // Event listener
+        table.addEventListener('click', tableSelectListener);
+        table.addEventListener('click', tableDeleteListener);
+
     }
 
     let tableHTML = '';
@@ -28,9 +68,9 @@ export const renderTable = (element) => {
                 <td>${ lastName }</td>
                 <td>${ isActive ? 'Active' : 'Inactive' }</td>
                 <td>
-                    <a href="#/" data-id=${ id }>Select</a>
+                    <a href="#/" class="select-user" data-id=${ id }>Select</a>
                     |
-                    <a href="#/" data-id=${ id }>Delete</a>
+                    <a href="#/" class="delete-user" data-id=${ id }>Delete</a>
                 </td>
             </tr>`;
     });
