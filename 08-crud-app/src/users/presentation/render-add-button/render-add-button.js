@@ -12,7 +12,7 @@ export const renderAddButton = (element) => {
 
     element.append(fabButton);
 
-    // Event listener for the add button
+    // Event listener
     fabButton.addEventListener('click', () => {
         showModal();
     });

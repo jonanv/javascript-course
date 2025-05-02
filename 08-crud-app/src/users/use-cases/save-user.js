@@ -19,7 +19,7 @@ export const saveUser = async(userLike) => {
         userUpdated = await updateUser(userToSave);
     else 
         userUpdated = await createUser(userToSave);
-    
+
     return localhostToUserMapper(userUpdated);
 }
 

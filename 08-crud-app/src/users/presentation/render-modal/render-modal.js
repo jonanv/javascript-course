@@ -58,14 +58,14 @@ export const renderModal = (element, callback) => {
 
     element.append(modal);
 
-    // Event listener for the close button
+    // Event listener
     modal.addEventListener('click', (event) => {
         if (event.target.className === 'modal-container') {
             hideModal();
         }
     });
 
-    // Event listener for the save button
+    // Event listener
     const form = document.querySelector('form');
     form.addEventListener('submit', async(event) => {
         event.preventDefault();
