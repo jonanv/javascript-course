@@ -27,6 +27,7 @@ npm run build           # create app's dist
 # Crud App
 ```
 npm run server  # run json-server
+
 ```
 
 ![crud-app](08-crud-app/src/assets/imgs/image.png)
