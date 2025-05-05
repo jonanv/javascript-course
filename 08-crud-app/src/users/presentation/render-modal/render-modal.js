@@ -71,6 +71,14 @@ export const renderModal = (element, callback) => {
         event.preventDefault();
 
         const formData = new FormData(form);
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            if (!checkbox.checked) {
+                formData.append(checkbox.name, 'false');
+            }
+        });
+        
+        // console.log(Object.fromEntries(formData.entries()));
         let userLike = { ...loadUser};
         
         for (const [key, value] of formData.entries()) {
