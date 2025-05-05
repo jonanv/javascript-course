@@ -39,7 +39,7 @@ export const createUser = async(user) => {
     });
 
     const newUser = await response.json();
-    console.log({ newUser });
+    // console.log({ newUser });
     return newUser;
 }
 
@@ -59,6 +59,6 @@ export const updateUser = async(user) => {
     });
 
     const updateUser = await response.json();
-    console.log({ updateUser });
+    // console.log({ updateUser });
     return updateUser;
 }
