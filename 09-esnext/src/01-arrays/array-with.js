@@ -1,4 +1,4 @@
-const superHeroes = [
+const state = [
     {
         id: 1,
         name: 'Batman',
@@ -17,17 +17,21 @@ const superHeroes = [
     },
 ];
 
-// Copy
-const superHeroesCopy = [...superHeroes];
-superHeroesCopy[0].name = 'Bruce Wayne';
+const index = 1;
+const newName = 'Green Lantern';
 
-const superHeroesCopy2 = JSON.parse(JSON.stringify(superHeroes));
-superHeroesCopy2[0].name = 'Bruce W';
+// const newState = state.map((hero, i) => {
+//     if (i === index) {
+//         hero.name = newName;
+//     }   
+//     return {...hero};
+// });
 
-const superHeroesCopy3 = structuredClone(superHeroes);
-superHeroesCopy3[0].name = 'Batman';
+const newState = state.with(index, {
+    ...state.at(index),
+    name: newName
+});
 
-console.table(superHeroes);
-console.table(superHeroesCopy);
-console.table(superHeroesCopy2);
-console.table(superHeroesCopy3);
+state[0].name = 'Volcan Negro';
+
+console.table(newState);
