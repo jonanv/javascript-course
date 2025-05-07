@@ -1,6 +1,6 @@
 # Javascript
 
-## Javascript course
+## JavaScript Moderno: Guía para dominar el lenguaje - DevTalles
 
 This is a course follow the materia created by Fernando Herrera in his course Javascript in DevTalles
 
